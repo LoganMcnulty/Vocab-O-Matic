@@ -67,3 +67,32 @@
   border-radius: 5px;
   border-bottom: 4px solid #219882;
 }
+
+
+.list-group-item {
+  line-height: 2.5;
+}
+
+#contact-form {
+  border: 5px solid black;
+  padding: 50px;
+  margin: 20px;
+}
+
+#grade-form {
+  border: 5px solid black;
+  padding: 30px;
+  margin: 20px;
+  justify-content: center;
+}
+
+#Submission-form {
+  border: 5px solid black;
+  padding: 30px;
+  margin: 20px;
+  justify-content: center;
+}
+
+.bodycss{
+background-color: whitesmoke;
+}
