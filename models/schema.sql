@@ -5,9 +5,10 @@ CREATE TABLE user_info
 (
 	id int NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
+    fullName varchar(255),
     userName varchar(255) NOT NULL,
-    passWord varchar(255) NOT NULL,
-	optionalBool BOOLEAN DEFAULT false,
+    password varchar(255) NOT NULL,
+	userBOOL BOOLEAN DEFAULT false,
     timestamp TIMESTAMP,
 	PRIMARY KEY (id)
 );
@@ -17,28 +18,28 @@ CREATE TABLE vocab_content
 	id INT NOT NULL AUTO_INCREMENT,
 	word VARCHAR(25) NOT NULL,
     grade VARCHAR(25) NOT NULL,
-    subject VARCHAR(25) NOT NULL,
+    vocabSubject VARCHAR(25) NOT NULL,
     listNumber INT,
-    dayCount INT,
-    weekCount INT,
-    monthCount INT,
-	optionalBool BOOLEAN DEFAULT false,
+    singleCount INT,
+	vocabBOOL BOOLEAN DEFAULT false,
     timestamp TIMESTAMP,
 	PRIMARY KEY (id)
 );
 
 
-CREATE TABLE list_record
+CREATE TABLE delivery_record
 (
   id INT NOT NULL AUTO_INCREMENT,
   recordID INT,
+  userID INT NOT NULL,
   listNumber INT,
-  subject VARCHAR(25) NOT NULL,
+  frequencyTracker INT,
+  vocabSubject VARCHAR(25) NOT NULL,
   email VARCHAR(45) NOT NULL,
-  sms VARCHAR(20),
+  smsNumber VARCHAR(20),
   grade INT default 0,
   frequency VARCHAR(25) NOT NULL,
-  optionalBool BOOLEAN DEFAULT false,
+  listBOOL BOOLEAN DEFAULT false,
   timestamp TIMESTAMP,
   PRIMARY KEY (id)
 );
