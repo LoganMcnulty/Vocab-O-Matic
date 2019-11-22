@@ -33,18 +33,6 @@
   box-shadow: 0px 0px 2px #848484;
 }
 
-.form-group{
-  margin-bottom: 25px;
-}
-
-.form-group input{
-  height: 42px;
-  border-radius: 5px;
-  border: 0;
-  font-size: 18px;
-  padding-left: 54px;
-}
-
 .fa-user{
   position: absolute;
   font-size: 22px;
