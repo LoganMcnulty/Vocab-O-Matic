@@ -24,6 +24,26 @@ module.exports = function(sequelize, DataTypes) {
     lastName: {
       type: DataTypes.STRING,
       allowNull: true
+    studentName: {
+      type: DataTypes.STRING,
+      // FIX THIS LATER, FOR TESTING PURPOSES NULL NOW
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
+    studentGradeLevel: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    reminderSchedule: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    userBOOL: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: true
     }
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
