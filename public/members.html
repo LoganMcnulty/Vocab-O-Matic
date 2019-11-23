@@ -2,34 +2,139 @@
 <html lang="en">
 
 <head>
-  <title>Passport Authentication</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
-  <link href="stylesheets/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Vocab-O-Matic Sign Up!</title>
+
+  <!-- mobile device compatibility -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 
+  <!-- boot strap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <!-- custom CSS -->
+    <link rel="stylesheet" href="styles/styles.css">
+
+  <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Geo" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+
+<!-- header -->
   <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/logout">
-        Logout
-      </a>
-    </div>
-  </div>
-</nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h2>Welcome <span class="member-name"></span></h2>
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/logout">
+          Logout
+        </a>
       </div>
     </div>
-  </div>
+  </nav>
 
+<!-- contains entirety of page content  -->
+  <div class="container">
+
+    <!-- welcome message and about the app -->
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h2>Welcome <span class="member-name"></span></h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+            <!--App header-->
+            <h1 class="h1-responsive font-weight-bold text-center my-4">Vocab-O-Matic</h1>
+            <!--App Description-->
+            <p class="text-center w-responsive mx-auto mb-5">This app will send (via SMS or email) a list of vocabulary words to parents to use with their students. The problem is to expose students to new words outside of the classroom to help them develop a rich vocabulary. Users will enter contact information, preferences for topics, and the frequency that they want to receive the list of work. The app will send list of words based on these preferences.</p>
+        </div>
+      </div>
+
+    <!-- add student, view student -->
+      <div class="row justify-content-around">
+          <div class="col-lg-10">
+            <div class="card card-default" style="margin-bottom: 5%; border:3px solid lightblue">
+              <div class="card-header" style="background:wheat; font-weight:bold">
+                Add/Update Student Info
+              </div>
+              <div class="card-body">
+
+                <!-- Input Form -->
+                  <div class="row justify-content-around">
+                      <div class="col-lg-5">
+                          <form>
+                            <!-- student name -->
+                              <div class="form-group">
+                                <label for="studentNameInput">Student Name:</label>
+                                <input class="form-control" id="studentNameInput" type="text">
+                              </div>
+                            <!-- grade level  -->
+                              <div class="form-group">
+                                <label for="studentGradeLevelForm">Grade Level</label>
+                                <select class="form-control" id="studentGradeLevelForm">
+                                  <option value="1">First</option>
+                                  <option value="2">Second</option>
+                                  <option value="3">Third</option>
+                                  <option value="4">Fourth</option>
+                                  <option value="5">Fifth</option>
+                                </select>
+                              </div>
+                            <!-- reminder frequency  -->
+                              <div class="form-group">
+                                <label for="reminderFreqSelect">Reminder Frequency</label>
+                                <select class="form-control" id="reminderFreqSelect">
+                                  <option value="Daily">Daily at 4:00 PM</option>
+                                  <option value="Weekly">Weekly on Wednesday</option>
+                                </select>
+                              </div>
+                            <!-- sudmit student  -->
+                              <div class="row">
+                                  <div class="col-lg-2 mr-auto">
+                                    <button class="btn btn-default" id="addStudent" type="submit" style="background:wheat; font-weight:bold">Submit</button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+
+                      <!-- view student info -->
+                      <div class="card col-lg-5" style="width: 18rem;">
+                        <div class="card-body">
+                          <h5 class="card-title">Your Student</h5>
+                          <ul class="list-group list-group-flush">
+                              <li class="list-group-item">
+                                  <p id="studentNameExisting">test</p>
+                              </li>
+                              <li class="list-group-item">
+                                  <p id="studentGradeExisting">test</p>
+                              </li>
+                              <li class="list-group-item">
+                                  <p id="studentReminderExisting">test</p>
+                              </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                  </div>
+              </div>
+          </div>
+        </div>
+
+    </div>  
+
+<!-- footer -->
+  <footer class="footer">
+    <div class="container" style="background: #e9ecef; width: 35%;text-align:center; margin-bottom:4%">
+        <a target="_blank" href="/api/friends">API Vocab Link</a> | 
+        <a target="_blank" href="https://github.com/LoganMcnulty/Vocab-O-Matic">GitHub Repo</a>
+    </div>
+  </footer>
+
+
+</body>
+</html>
+
+<!-- script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/members.js"></script>
 
-</body>
 
-</html>

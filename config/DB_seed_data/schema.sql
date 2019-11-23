@@ -1,5 +1,5 @@
-CREATE DATABASE vocab_db;
-USE vocab_db;
+CREATE DATABASE vocabomatic;
+USE vocabomatic;
 
 CREATE TABLE user_info
 (
