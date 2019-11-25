@@ -17,6 +17,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: true
     studentName: {
       type: DataTypes.STRING,
       // FIX THIS LATER, FOR TESTING PURPOSES NULL NOW
