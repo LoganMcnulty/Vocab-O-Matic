@@ -42,8 +42,27 @@ module.exports = function(app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id
+        id: req.user.id,
+        studentGradeLevel: req.user.studentGradeLevel
       });
     }
+  });
+
+  app.get("/api/curriculum", function(req, res) {
+    db.Curriculum.findAll({}).then(function(results) {
+      res.json(results);
+    });
+  });
+
+  app.get("/api/curriculum/:grade/:list", function(req, res) {
+    db.Curriculum.findAll({
+      where: {
+        grade: req.params.grade,
+        listNumber: req.params.list
+      }
+    }).then(function(vocabByGrade) {
+      res.json(vocabByGrade);
+      console.log(vocabByGrade);
+    });
   });
 };

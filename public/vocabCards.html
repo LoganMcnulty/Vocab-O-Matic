@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Vocab-O-Matic</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/66fb9cbaef.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+
+  <style>
+    body{
+      background: url(./images/classroom.jpg) no-repeat center center fixed;
+      background-size:cover ;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="container">
+    <div class="row justify-content-center">
+      <div class="jumbotron col-9">
+        <h1 class="display-4" style="font-family: 'Yanone Kaffeesatz', sans-serif; font-size: 60px; text-align:center; margin-top:-5%; margin-bottom:-5%">
+            Today's Vocab Words 
+            <i class="fas fa-book-reader" style="margin-left: 2%"></i>
+        </h1>
+      </div>
+    </div>
+
+<!-- name and image entry -->
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+      <!-- Vocab Div -->
+      <div class="card" style="background-color:#e9ecef">
+        <div class="card-body justify-content-center" id="wordBody" style="text-align:center">
+
+                <div class="card" style="width: 30rem; margin: 0 auto 2%">
+                    <div class="card-body">
+                        <h2 class="card-title" id="word" style="font-family: 'Yanone Kaffeesatz', sans-serif; text-transform: capitalize"></h2>
+                        <p class="card-text" id="definition"style="font-family: 'Yanone Kaffeesatz', sans-serif; font-size: 20px; "></p>
+                    </div>
+                </div>
+
+            <div class="row justify-content-around" style="margin-top:3%">
+                <button type="submit" class="btn btn-primary submit" id="define">Show Definition</button>
+                <button type="submit" class="btn btn-primary submit" id="next">Next Word</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- footer -->
+<footer class="footer">
+    <div class="container" style="background: #e9ecef; width: 35%;text-align:center; margin-top:4%">
+        <a target="_blank" href="/api/curriculum">API Vocab Link</a> | 
+        <a target="_blank" href="https://github.com/LoganMcnulty/Vocab-O-Matic">GitHub Repo</a>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+<!-- Java Script -->
+<script type="text/javascript">
+
+    var vocabWords = []
+    var wordCount = 0
+    var word = ""
+    var definition = ""
+    $("#definition").toggle()
+
+    var grade 
+    var list 
+
+    $.get("/api/user_data").then(function(data) {
+        console.log(data);
+    });
+
+    $.get(`api/curriculum/${grade}/${list}`).then(function(data) {
+        // console.log(data)
+        for (i=0; i < data.length; i++){
+          vocabWords.push(data[i])
+        }
+        console.log(`these are the vocab words for grade ${grade} from list ${list}...`)
+        console.log(vocabWords)
+    
+          wordSlides();
+    });
+
+    function wordSlides(){
+      word = vocabWords[wordCount].word;
+      $("#word").html(word)
+      defineWord(word) 
+    }
+
+    function defineWord(newWord){
+      var url = "https://dictionaryapi.com/api/v3/references/sd2/json/" + newWord + "?key=7c3b9fe1-ed9f-4962-9fbe-d7841818b332";
+      console.log(url)
+      $.ajax({
+          url: url,
+          method: "GET"
+      }).then(function(response) {
+        if (response[0].shortdef.length > 1){
+          console.log(response)
+          definition = `${response[0].fl}: ${response[0].shortdef[0]}`
+          console.log(definition)
+        }
+        else {
+          definition = `${response[0].fl}: ${response[0].shortdef}`
+        }
+      });
+    }
+
+    $("#next").on("click", function(event){
+          wordCount++
+          console.log(wordCount)
+          console.log(vocabWords.length)
+            if(wordCount + 1 > vocabWords.length){
+              wordCount = 0
+            }
+          wordSlides()
+          $("#definition").toggle()
+        })
+
+      $("#define").on("click", function(event) {
+        $("#definition").text(definition)
+        $("#definition").toggle()
+      })
+</script>

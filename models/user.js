@@ -12,20 +12,22 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: true
       }
     },
-    // The password cannot be null
     password: {
       type: DataTypes.STRING,
       allowNull: false
     },
     studentName: {
       type: DataTypes.STRING,
-      // FIX THIS LATER, FOR TESTING PURPOSES NULL NOW
       allowNull: true,
       validate: {
         len: [1]
       }
     },
     studentGradeLevel: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    studentListNumber: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
