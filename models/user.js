@@ -12,7 +12,6 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: true
       }
     },
-    // The password cannot be null
     password: {
       type: DataTypes.STRING,
       allowNull: false
@@ -25,30 +24,30 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     }
-    // studentName: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    //   validate: {
-    //     len: [1]
-    //   }
-    // },
-    // studentGradeLevel: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: true
-    // },
-    // studentListNumber: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: true
-    // },
-    // reminderSchedule: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true
-    // },
-    // userBOOL: {
-    //   type: DataTypes.BOOLEAN,
-    //   allowNull: true,
-    //   defaultValue: true
-    // }
+    studentName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
+    studentGradeLevel: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    studentListNumber: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    reminderSchedule: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    userBOOL: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: true
+    }
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
   User.prototype.validPassword = function(password) {
