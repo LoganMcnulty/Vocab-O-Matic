@@ -33,11 +33,16 @@
   box-shadow: 0px 0px 2px #848484;
 }
 
+.form-control {
+  padding-left: 54px;
+}
+
 .fa-user{
   position: absolute;
   font-size: 22px;
   left: 28px;
   padding-top: 8px;
+  
 
 }
 
