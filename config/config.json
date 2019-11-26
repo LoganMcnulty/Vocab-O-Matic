@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "test123",
-    "database": "vocabomatic",
+    "password": null,
+    "database": "usrpwd_db",
     "host": "localhost",
     "dialect": "mysql"
   },

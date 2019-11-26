@@ -16,10 +16,33 @@ module.exports = function(app) {
   app.post("/api/signup", function(req, res) {
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
     })
       .then(function() {
         res.redirect(307, "/api/login");
+      })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
+
+  app.put("/api/addStudent/:userID", function(req, res) {
+    db.User.update(
+      {
+        studentName: req.body.studentName,
+        studentGradeLevel: req.body.studentGradeLevel,
+        reminderSchedule: req.body.reminderSchedule
+      },
+      {
+        where: {
+          id: req.params.userID
+        }
+      }
+    )
+      .then(function(studentUpdate) {
+        res.json(studentUpdate);
       })
       .catch(function(err) {
         res.status(401).json(err);
@@ -42,8 +65,30 @@ module.exports = function(app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id
+        id: req.user.id,
+        studentGradeLevel: req.user.studentGradeLevel,
+        studentListCount: req.user.studentListCount,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName
       });
     }
+  });
+
+  app.get("/api/curriculum", function(req, res) {
+    db.Curriculum.findAll({}).then(function(results) {
+      res.json(results);
+    });
+  });
+
+  app.get("/api/curriculum/:grade/:list", function(req, res) {
+    db.Curriculum.findAll({
+      where: {
+        grade: req.params.grade,
+        listNumber: req.params.list
+      }
+    }).then(function(vocabByGrade) {
+      res.json(vocabByGrade);
+      console.log(vocabByGrade);
+    });
   });
 };
