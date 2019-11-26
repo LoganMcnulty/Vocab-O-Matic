@@ -83,20 +83,18 @@
 <!-- Java Script -->
 <script type="text/javascript">
 
-    var vocabWords = []
+var vocabWords = []
     var wordCount = 0
     var word = ""
     var definition = ""
     $("#definition").toggle()
 
-    var grade 
-    var list 
-
     $.get("/api/user_data").then(function(data) {
         console.log(data);
-    });
+        var grade = data.studentGradeLevel;
+        var list = data.studentListCount
 
-    $.get(`api/curriculum/${grade}/${list}`).then(function(data) {
+        $.get(`api/curriculum/${grade}/${list}`).then(function(data) {
         // console.log(data)
         for (i=0; i < data.length; i++){
           vocabWords.push(data[i])
@@ -105,6 +103,7 @@
         console.log(vocabWords)
     
           wordSlides();
+    });
     });
 
     function wordSlides(){
@@ -141,9 +140,9 @@
           wordSlides()
           $("#definition").toggle()
         })
-
       $("#define").on("click", function(event) {
         $("#definition").text(definition)
         $("#definition").toggle()
       })
+
 </script>
