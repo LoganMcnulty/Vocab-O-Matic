@@ -28,6 +28,27 @@ module.exports = function(app) {
       });
   });
 
+  app.put("/api/addStudent/:userID", function(req, res) {
+    db.User.update(
+      {
+        studentName: req.body.studentName,
+        studentGradeLevel: req.body.studentGradeLevel,
+        reminderSchedule: req.body.reminderSchedule
+      },
+      {
+        where: {
+          id: req.params.userID
+        }
+      }
+    )
+      .then(function(studentUpdate) {
+        res.json(studentUpdate);
+      })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
+
   // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();
@@ -45,7 +66,8 @@ module.exports = function(app) {
       res.json({
         email: req.user.email,
         id: req.user.id,
-        studentGradeLevel: req.user.studentGradeLevel
+        studentGradeLevel: req.user.studentGradeLevel,
+        studentListCount: req.user.studentListCount
       });
     }
   });
