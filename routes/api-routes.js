@@ -46,7 +46,8 @@ module.exports = function(app) {
         email: req.user.email,
         id: req.user.id,
         firstName: req.user.firstName,
-        lastName: req.user.lastName
+        lastName: req.user.lastName,
+        studentGradeLevel: req.user.studentGradeLevel
       });
     }
   });
