@@ -45,6 +45,8 @@ module.exports = function(app) {
       res.json({
         email: req.user.email,
         id: req.user.id,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
         studentGradeLevel: req.user.studentGradeLevel
       });
     }
