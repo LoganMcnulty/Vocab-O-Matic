@@ -5,8 +5,7 @@ $(document).ready(function() {
   var userID;
 
   $.get("/api/user_data").then(function(data) {
-    $(".member-name").text(data.email);
-    userID = data.id;
+    $(".member-name").text(`${data.firstName} ${data.lastName}`);
   });
 
   $("#addStudent").on("click", function(event) {

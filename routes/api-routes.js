@@ -67,7 +67,9 @@ module.exports = function(app) {
         email: req.user.email,
         id: req.user.id,
         studentGradeLevel: req.user.studentGradeLevel,
-        studentListCount: req.user.studentListCount
+        studentListCount: req.user.studentListCount,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName
       });
     }
   });

@@ -17,20 +17,25 @@
 .modal-content{
   background-color:  rgb(179, 133, 66);
   opacity: .95;
-  padding: 0 18px;
+  padding-top: 30px;
+  padding-left: 18px;
+  padding-right: 18px;
   box-shadow: 0px 0px 7px #848484;
 }
 
 .vomlogo{
   margin-top: -50px;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
+  
 }
 
 .vomlogo img{
-  height: 10%;
-  width: 30%;
-  border-radius: 5px;
-  box-shadow: 0px 0px 2px #848484;
+  width: 100%;
+  
+}
+
+.form-control {
+  padding-left: 54px;
 }
 
 .fa-user{
@@ -38,6 +43,7 @@
   font-size: 22px;
   left: 28px;
   padding-top: 8px;
+  
 
 }
 
