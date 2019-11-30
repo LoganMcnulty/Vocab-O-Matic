@@ -69,6 +69,8 @@ module.exports = function(app) {
         email: req.user.email,
         id: req.user.id,
         studentGradeLevel: req.user.studentGradeLevel,
+        reminderSchedule: req.user.reminderSchedule,
+        studentName: req.user.studentName,
         studentListCount: req.user.studentListCount,
         firstName: req.user.firstName,
         lastName: req.user.lastName

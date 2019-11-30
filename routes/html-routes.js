@@ -38,4 +38,8 @@ module.exports = function(app) {
   app.get("/vocabCards", isAuthenticated, function(req, res) {
     res.sendFile(path.join(__dirname, "../public/vocabCards.html"));
   });
+
+  app.get("/research", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/authors.html"));
+  });
 };

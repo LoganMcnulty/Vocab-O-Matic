@@ -1,6 +1,5 @@
 $(document).ready(function() {
   // This file just does a GET request to figure out which user is logged in
-  // and updates the HTML on the page
 
   var vocabWords = [];
   var wordCount = 0;
@@ -13,15 +12,12 @@ $(document).ready(function() {
   var justWords;
   var htmlFormat;
 
-  
-
   $.get("/api/user_data").then(function(data) {
     $(".member-name").text(`${data.firstName} ${data.lastName}`);
     userID = data.id;
     grade = data.studentGradeLevel;
     list = data.studentListCount;
     email = data.email;
-
     console.log(
       "Collected info from user_data route and got name",
       userID,
@@ -29,7 +25,17 @@ $(document).ready(function() {
       list,
       email
     );
+    var studentName = data.studentName
+    var studentGrade = data.studentGradeLevel
+    var reminderSchedule = data.reminderSchedule
+
+    $("#studentNameExisting").text(`${studentName}`)
+    $("#studentGradeExisting").text(`Grade Level: ${studentGrade} `)
+    $("#studentReminderExisting").text(`Reminder: ${reminderSchedule}`)
+
+    console.log(data)
   });
+  
 
   $("#addStudent").on("click", function(event) {
     event.preventDefault();
@@ -50,8 +56,6 @@ $(document).ready(function() {
   });
 
   function addStudent(studentName, studentGradeLevel, reminderSchedule) {
-    
-
     $.ajax({
       method: "PUT",
       url: "/api/addStudent/" + userID,

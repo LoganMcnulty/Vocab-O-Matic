@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
+    "password": "test123",
     "database": "vocabomatic",
     "host": "localhost",
     "dialect": "mysql"
