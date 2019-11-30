@@ -13,7 +13,7 @@ $(document).ready(function() {
   var justWords;
   var htmlFormat;
 
-  // var CronJob = require("cron").CronJob;
+  
 
   $.get("/api/user_data").then(function(data) {
     $(".member-name").text(`${data.firstName} ${data.lastName}`);
@@ -50,12 +50,7 @@ $(document).ready(function() {
   });
 
   function addStudent(studentName, studentGradeLevel, reminderSchedule) {
-    // $.put("/api/addStudent/" + userID, {
-    //   studentName: studentName,
-    //   studentGradeLevel: studentGradeLevel,
-    //   reminderSchedule: reminderSchedule
-    // });
-    // console.log(studentName, studentGradeLevel, reminderSchedule);
+    
 
     $.ajax({
       method: "PUT",
@@ -69,7 +64,7 @@ $(document).ready(function() {
       console.log(result);
     });
   }
-//TO DO: FIX THIS API 
+//TO DO: FIX THIS API BECAUSE IT RETURNS EVERYTHING, but manually limiting to 5 words in the for loop
   function sendEmail() {
     $.get(`api/curriculum/?=${grade}/${list}`).then(function(data) {
       console.log(data);

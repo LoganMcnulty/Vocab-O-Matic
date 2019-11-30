@@ -83,10 +83,9 @@ module.exports = function(app) {
   });
 
   app.get("/api/send", function(req, res) {
-    console.log("/api/send");
-
+    require("dotenv").config();
     var mailOptions = {
-      from: "justincarlson7@gmail.com",
+      from: "justinrobertcarlson@gmail.com",
       to: req.query.to,
       subject: req.query.subject,
       text: req.query.text,
@@ -95,16 +94,35 @@ module.exports = function(app) {
 
     console.log(mailOptions);
 
-    var options = {
+    // var options = {
+    //   service: "SendGrid",
+    //   host: "smtp.sendgrid.net",
+    //   auth: {
+    //     api_user: process.env.api_user,
+    //     api_key: process.env.api_key
+    //   }
+    // };
+    // var client = nodemailer.createTransport(sgTransport(options));
+
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
       auth: {
-        api_user: process.env.api_user,
-        api_key: process.env.api_key
+        user: process.env.mail_user,
+        pass: process.env.mail_pass
       }
+    });
+
+    var mailOptions = {
+      from: "justinrobertcarlson@gmail.com",
+      to: req.query.to,
+      subject: req.query.subject,
+      text: req.query.text,
+      html: req.query.html
     };
 
-    var client = nodemailer.createTransport(sgTransport(options));
+    console.log(mailOptions);
 
-    client.sendMail(mailOptions, function(err, info) {
+    transporter.sendMail(mailOptions, function(err, info) {
       if (err) {
         console.log(err);
       } else {
