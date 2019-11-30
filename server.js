@@ -2,12 +2,16 @@
 var express = require("express");
 var session = require("express-session");
 
+// var sgTransport = require("nodemailer-sendgrid-transport");
+
 // Requiring passport as we've configured it
 var passport = require("./config/passport");
 
 // Setting up express app
 var PORT = process.env.PORT || 8080;
 var app = express();
+
+//Email transport
 
 // Requiring our models for syncing
 var db = require("./models");

@@ -97,8 +97,8 @@ module.exports = function(app) {
 
     var options = {
       auth: {
-        api_user: "justincarlson7",
-        api_key: "$$Pa$$word$$$$Pa$$word$$1"
+        api_user: process.env.api_user,
+        api_key: process.env.api_key
       }
     };
 
