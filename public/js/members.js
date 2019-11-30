@@ -1,13 +1,20 @@
 $(document).ready(function() {
   // This file just does a GET request to figure out which user is logged in
-  // and updates the HTML on the page
-
 
   var userID;
 
   $.get("/api/user_data").then(function(data) {
     $(".member-name").text(`${data.firstName} ${data.lastName}`);
     userID = data.id;
+    var studentName = data.studentName
+    var studentGrade = data.studentGradeLevel
+    var reminderSchedule = data.reminderSchedule
+
+    $("#studentNameExisting").text(`${studentName}`)
+    $("#studentGradeExisting").text(`Grade Level: ${studentGrade} `)
+    $("#studentReminderExisting").text(`Reminder: ${reminderSchedule}`)
+
+    console.log(data)
   });
   
 
@@ -28,13 +35,6 @@ $(document).ready(function() {
   });
 
   function addStudent(studentName, studentGradeLevel, reminderSchedule) {
-    // $.put("/api/addStudent/" + userID, {
-    //   studentName: studentName,
-    //   studentGradeLevel: studentGradeLevel,
-    //   reminderSchedule: reminderSchedule
-    // });
-    // console.log(studentName, studentGradeLevel, reminderSchedule);
-
     $.ajax({
       method: "PUT",
       url: "/api/addStudent/" + userID,

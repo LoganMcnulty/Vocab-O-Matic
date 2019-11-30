@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
     lastName: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
     studentName: {
       type: DataTypes.STRING,
       allowNull: true,
