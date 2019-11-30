@@ -1,6 +1,8 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+var nodemailer = require("nodemailer");
+var sgTransport = require("nodemailer-sendgrid-transport");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -80,6 +82,37 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/send", function(req, res) {
+    console.log("/api/send");
+
+    var mailOptions = {
+      from: "justincarlson7@gmail.com",
+      to: req.query.to,
+      subject: req.query.subject,
+      text: req.query.text,
+      html: req.query.html
+    };
+
+    console.log(mailOptions);
+
+    var options = {
+      auth: {
+        api_user: "justincarlson7",
+        api_key: "$$Pa$$word$$$$Pa$$word$$1"
+      }
+    };
+
+    var client = nodemailer.createTransport(sgTransport(options));
+
+    client.sendMail(mailOptions, function(err, info) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Message sent: " + info.response);
+      }
+    });
+  });
+
   app.get("/api/curriculum/:grade/:list", function(req, res) {
     db.Curriculum.findAll({
       where: {
@@ -88,7 +121,7 @@ module.exports = function(app) {
       }
     }).then(function(vocabByGrade) {
       res.json(vocabByGrade);
-      console.log(vocabByGrade);
+      res.sendFile(path.join(__dirname, "../public/vocabCards.html"));
     });
   });
 };
