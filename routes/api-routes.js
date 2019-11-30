@@ -1,6 +1,8 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+var nodemailer = require("nodemailer");
+var sgTransport = require("nodemailer-sendgrid-transport");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -82,6 +84,55 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/send", function(req, res) {
+    require("dotenv").config();
+    var mailOptions = {
+      from: "justinrobertcarlson@gmail.com",
+      to: req.query.to,
+      subject: req.query.subject,
+      text: req.query.text,
+      html: req.query.html
+    };
+
+    console.log(mailOptions);
+
+    // var options = {
+    //   service: "SendGrid",
+    //   host: "smtp.sendgrid.net",
+    //   auth: {
+    //     api_user: process.env.api_user,
+    //     api_key: process.env.api_key
+    //   }
+    // };
+    // var client = nodemailer.createTransport(sgTransport(options));
+
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.mail_user,
+        pass: process.env.mail_pass
+      }
+    });
+
+    var mailOptions = {
+      from: "justinrobertcarlson@gmail.com",
+      to: req.query.to,
+      subject: req.query.subject,
+      text: req.query.text,
+      html: req.query.html
+    };
+
+    console.log(mailOptions);
+
+    transporter.sendMail(mailOptions, function(err, info) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Message sent: " + info.response);
+      }
+    });
+  });
+
   app.get("/api/curriculum/:grade/:list", function(req, res) {
     db.Curriculum.findAll({
       where: {
@@ -90,7 +141,7 @@ module.exports = function(app) {
       }
     }).then(function(vocabByGrade) {
       res.json(vocabByGrade);
-      console.log(vocabByGrade);
+      res.sendFile(path.join(__dirname, "../public/vocabCards.html"));
     });
   });
 };
