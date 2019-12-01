@@ -139,9 +139,13 @@ module.exports = function(app) {
         grade: req.params.grade,
         listNumber: req.params.list
       }
-    }).then(function(vocabByGrade) {
-      res.json(vocabByGrade);
-      res.sendFile(path.join(__dirname, "../public/vocabCards.html"));
-    });
+    })
+      .then(function(vocabByGrade) {
+        res.json(vocabByGrade);
+      })
+      .then(function(vocabByGrade) {
+        res.sendFile(path.join(__dirname, "../public/vocabCards.html"));
+      })
+      .catch();
   });
 };
