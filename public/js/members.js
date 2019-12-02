@@ -66,13 +66,14 @@ $(document).ready(function() {
       }
     }).then(function(result) {
       console.log(result);
+      window.location="/vocabCards.html";
     });
   }
 //TO DO: FIX THIS API BECAUSE IT RETURNS EVERYTHING, but manually limiting to 5 words in the for loop
   function sendEmail() {
-    $.get(`api/curriculum/?=${grade}/${list}`).then(function(data) {
+    $.get(`api/curriculum/${grade}/${list}`).then(function(data) {
       console.log(data);
-      for (i = 0; i < 5; i++) {
+      for (i = 0; i < data.length; i++) {
         vocabWords.push(data[i]);
       }
       console.log(
@@ -110,10 +111,8 @@ $(document).ready(function() {
       $.get(
         "api/send",
         { to: to, subject: subject, text: text, html: html }).then
-        (function(data) {
-          sendfile("/vocabCards");
-        }
-      );
+        (function(result) { console.log("Finished")}
+      ).catch();
     });
   }
 });

@@ -2,7 +2,7 @@
 var db = require("../models");
 var passport = require("../config/passport");
 var nodemailer = require("nodemailer");
-var sgTransport = require("nodemailer-sendgrid-transport");
+var cron = require("node-cron");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -114,23 +114,30 @@ module.exports = function(app) {
       }
     });
 
-    var mailOptions = {
-      from: "justinrobertcarlson@gmail.com",
-      to: req.query.to,
-      subject: req.query.subject,
-      text: req.query.text,
-      html: req.query.html
-    };
+    // var mailOptions = {
+    //   from: "justinrobertcarlson@gmail.com",
+    //   to: req.query.to,
+    //   subject: req.query.subject,
+    //   text: req.query.text,
+    //   html: req.query.html
+    // };
 
-    console.log(mailOptions);
+    console.log("Before job instantiation");
+    cron.schedule("0 */5 * * * *", function() {
+      var d = new Date();
+      console.log("Every Tenth Minute:", d);
 
-    transporter.sendMail(mailOptions, function(err, info) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("Message sent: " + info.response);
-      }
+      transporter.sendMail(mailOptions, function(err, info) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Message sent: " + info.response);
+        }
+      });
     });
+    console.log("After job instantiation");
+
+    // job.start();
   });
 
   app.get("/api/curriculum/:grade/:list", function(req, res) {
@@ -139,9 +146,10 @@ module.exports = function(app) {
         grade: req.params.grade,
         listNumber: req.params.list
       }
-    }).then(function(vocabByGrade) {
-      res.json(vocabByGrade);
-      res.sendFile(path.join(__dirname, "../public/vocabCards.html"));
-    });
+    })
+      .then(function(vocabByGrade) {
+        res.json(vocabByGrade);
+      })
+      .catch();
   });
 };
