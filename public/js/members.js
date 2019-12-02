@@ -66,6 +66,7 @@ $(document).ready(function() {
       }
     }).then(function(result) {
       console.log(result);
+      window.location="/vocabCards.html";
     });
   }
 //TO DO: FIX THIS API BECAUSE IT RETURNS EVERYTHING, but manually limiting to 5 words in the for loop
