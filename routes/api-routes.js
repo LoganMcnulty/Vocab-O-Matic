@@ -78,8 +78,32 @@ module.exports = function(app) {
     }
   });
 
+  app.get("/api/all_user_data", function(req, res) {
+    db.User.findAll({}).then(function(results) {
+      console.log("all user data");
+      res.json(results);
+    });
+  });
+
+  app.get("/api/all_user_data/:id", function(req, res) {
+    db.User.findAll({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(results) {
+      console.log("all user data");
+      res.json(results);
+    });
+  });
+
   app.get("/api/curriculum", function(req, res) {
     db.Curriculum.findAll({}).then(function(results) {
+      res.json(results);
+    });
+  });
+
+  app.get("/api/all_user_data", function(req, res) {
+    db.User.findAll({}).then(function(results) {
       res.json(results);
     });
   });

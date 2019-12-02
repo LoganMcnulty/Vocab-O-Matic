@@ -35,6 +35,30 @@ $(document).ready(function() {
 
     console.log(data)
   });
+
+  $.get("/api/all_user_data/:id").then(function(data) {
+    $(".member-name").text(`${data.firstName} ${data.lastName}`);
+    userID = data.id;
+    grade = data.studentGradeLevel;
+    list = data.studentListCount;
+    email = data.email;
+    console.log(
+      "Collected info from user_data route and got name",
+      userID,
+      grade,
+      list,
+      email
+    );
+    var studentName = data.studentName
+    var studentGrade = data.studentGradeLevel
+    var reminderSchedule = data.reminderSchedule
+
+    $("#studentNameExisting").text(`${studentName}`)
+    $("#studentGradeExisting").text(`Grade Level: ${studentGrade} `)
+    $("#studentReminderExisting").text(`Reminder: ${reminderSchedule}`)
+
+    console.log(data)
+  });
   
 
   $("#addStudent").on("click", function(event) {
