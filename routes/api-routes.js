@@ -102,12 +102,6 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/all_user_data", function(req, res) {
-    db.User.findAll({}).then(function(results) {
-      res.json(results);
-    });
-  });
-
   app.get("/api/send", function(req, res) {
     require("dotenv").config();
     var mailOptions = {
