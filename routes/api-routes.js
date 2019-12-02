@@ -150,9 +150,6 @@ module.exports = function(app) {
       .then(function(vocabByGrade) {
         res.json(vocabByGrade);
       })
-      .then(function(vocabByGrade) {
-        res.sendFile(path.join(__dirname, "../public/vocabCards.html"));
-      })
       .catch();
   });
 };
